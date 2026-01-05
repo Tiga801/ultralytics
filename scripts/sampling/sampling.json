@@ -2,56 +2,47 @@
     "analyseConditions": [
         {   
             "standName": "stand_001",
-            "taskID": "face_detection_001",
-			"taskName": "Face Detection",
+            "taskID": "sampling_001",
+			"taskName": "Sampling Detection 1",
 			"deviceInfo": {
 				"deviceName": "Camera1",
 				"deviceCode": "camera_00000001",
 				"sourceRTSP": "rtsp://192.168.2.71:8554/mystream3",
-				"resloution": "120x80"
+				"resloution": "192x108"
 			},
             "configParam": {
-                "task": "face_detection",
-                "model": "yolo11m-pose.pt",
-                "kpt_score": 0.65,
-                "face_score": 0.65,
-                "frame_skip": 3
+                "task": "sampling",
+                "model": "yolo11m.pt"
             }
         },
         {   
             "standName": "stand_001",
-            "taskID": "face_detection_002",
-			"taskName": "Face Detection",
+            "taskID": "sampling_002",
+			"taskName": "Sampling Detection 2",
 			"deviceInfo": {
 				"deviceName": "Camera1",
 				"deviceCode": "camera_00000001",
 				"sourceRTSP": "rtsp://192.168.2.71:8554/mystream3",
-				"resloution": "120x80"
+				"resloution": "192x108"
 			},
             "configParam": {
-                "task": "face_detection",
-                "model": "yolo11m-pose.pt",
-                "kpt_score": 0.65,
-                "face_score": 0.65,
-                "frame_skip": 3
+                "task": "sampling",
+                "model": "yolo11m.pt"
             }
         },
         {   
             "standName": "stand_002",
-            "taskID": "face_detection_003",
-			"taskName": "Face Detection",
+            "taskID": "sampling_003",
+			"taskName": "Sampling Detection 3",
 			"deviceInfo": {
 				"deviceName": "Camera2",
 				"deviceCode": "camera_00000002",
 				"sourceRTSP": "rtsp://192.168.2.71:8554/mystream4",
-				"resloution": "120x80"
+				"resloution": "108x72"
 			},
             "configParam": {
-                "task": "face_detection",
-                "model": "yolo11m-pose.pt",
-                "kpt_score": 0.65,
-                "face_score": 0.65,
-                "frame_skip": 3
+                "task": "sampling",
+                "model": "yolo11m.pt"
             }
         }
     ]                                                                                                                                                                                        
