@@ -33,3 +33,13 @@ runs/
 
 # Dependencies
 node_modules/
+
+# Tiga
+tiga/
+Todo/
+datasets/
+logs/
+results/
+examples/
+
+*.md
