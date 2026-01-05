@@ -1,0 +1,28 @@
+#!/bin/bash
+# Mac系统FFmpeg包装脚本 (ARM64)
+# 自动检测并使用系统FFmpeg
+
+# 查找FFmpeg路径
+FFMPEG_PATHS=(
+    "/usr/local/bin/ffmpeg"
+    "/opt/homebrew/bin/ffmpeg"
+    "/usr/bin/ffmpeg"
+    "$(which ffmpeg 2>/dev/null)"
+)
+
+FFMPEG_CMD=""
+for path in "${FFMPEG_PATHS[@]}"; do
+    if [ -x "$path" ]; then
+        FFMPEG_CMD="$path"
+        break
+    fi
+done
+
+if [ -z "$FFMPEG_CMD" ]; then
+    echo "❌ 错误: 未找到FFmpeg，请先安装FFmpeg"
+    echo "安装命令: brew install ffmpeg"
+    exit 1
+fi
+
+# 执行FFmpeg命令
+exec "$FFMPEG_CMD" "$@"

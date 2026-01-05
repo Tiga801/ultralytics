@@ -1,0 +1,19 @@
+{
+    "analyseConditions": [
+        {   
+            "standName": "stand_001",
+            "taskID": "cross_line_001",
+			"taskName": "Line Crossing Detection",
+			"deviceInfo": {
+				"deviceName": "Camera1",
+				"deviceCode": "camera_00000001",
+				"sourceRTSP": "rtsp://192.168.2.71:8554/mystream3",
+				"resloution": "1920x1080"
+			},
+            "configParam": {
+                "task": "cross_line",
+                "model": "yolo11m.pt"
+            }
+        }
+    ]                                                                                                                                                                                        
+}
