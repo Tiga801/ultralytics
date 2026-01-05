@@ -12,8 +12,8 @@ from task import TaskBase, TaskRegistry, TaskResult
 from tracks import BYTETracker, TrackerConfig
 
 
-@TaskRegistry.register("cross_line")
-class CrossLineDetectionTask(TaskBase):
+@TaskRegistry.register("test_task")
+class TestTask(TaskBase):
     """Task for detecting objects crossing a defined line.
 
     This task monitors a video stream for objects (people, vehicles, etc.)

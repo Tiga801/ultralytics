@@ -4,25 +4,22 @@ This module provides ready-to-use computer vision task implementations
 that extend the TaskBase class.
 
 Available Tasks:
-    - CrossLineDetectionTask: Detect objects crossing a defined line
-    - RegionIntrusionTask: Detect objects entering restricted areas
-    - FaceDetectionTask: Face detection and optional recognition
-    - CrowdDensityTask: Crowd density estimation and monitoring
+    - TestTask: Detect objects crossing a defined line
 
 Usage:
     Tasks are automatically registered with the TaskRegistry via decorators.
     Create tasks through the TaskRegistry.create() method.
 
     >>> from task import TaskRegistry
-    >>> task = TaskRegistry.create("cross_line", "task_001")
+    >>> task = TaskRegistry.create("test_task", "task_001")
 
 Or import specific task classes:
 
-    >>> from solutions import CrossLineDetectionTask
+    >>> from solutions import TestTask
 """
 
-from .cross_line import CrossLineDetectionTask
+from .test_task import TestTask
 
 __all__ = [
-    "CrossLineDetectionTask"
+    "TestTask"
 ]
