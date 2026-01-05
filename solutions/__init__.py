@@ -22,13 +22,7 @@ Or import specific task classes:
 """
 
 from .cross_line import CrossLineDetectionTask
-from .region_intrusion import RegionIntrusionTask
-from .face_detection import FaceDetectionTask
-from .crowd_density import CrowdDensityTask
 
 __all__ = [
-    "CrossLineDetectionTask",
-    "RegionIntrusionTask",
-    "FaceDetectionTask",
-    "CrowdDensityTask",
+    "CrossLineDetectionTask"
 ]
