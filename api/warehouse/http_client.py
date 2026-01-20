@@ -13,22 +13,8 @@ import threading
 import time
 from typing import Any, Callable, Dict, List, Optional
 
-<<<<<<< HEAD
-try:
-    import requests
-    from requests.adapters import HTTPAdapter
-    from urllib3.util.retry import Retry
-
-    REQUESTS_AVAILABLE = True
-except ImportError:
-    REQUESTS_AVAILABLE = False
-    requests = None
-    HTTPAdapter = None
-    Retry = None
-=======
 import requests
 from requests.adapters import HTTPAdapter
->>>>>>> 07331326 (feat: build video analytics task management system)
 
 from .config import EngineCapabilities, WarehouseConfig
 from .exceptions import (
@@ -66,19 +52,7 @@ class WarehouseHttpClient:
         Args:
             config: Warehouse configuration containing server address and timeouts.
             log_func: Optional function for logging messages.
-<<<<<<< HEAD
-
-        Raises:
-            ImportError: If the requests library is not installed.
         """
-        if not REQUESTS_AVAILABLE:
-            raise ImportError(
-                "requests library is not installed. "
-                "Please install it with: pip install requests"
-            )
-=======
-        """
->>>>>>> 07331326 (feat: build video analytics task management system)
 
         self._config = config
         self._log = log_func or self._default_log
@@ -359,11 +333,7 @@ class WarehouseHttpClient:
         self,
         engine_id: str,
         tasks: List[TaskInfo],
-<<<<<<< HEAD
-        algo_category: str = "behavior",
-=======
         algo_category: str = "other",
->>>>>>> 07331326 (feat: build video analytics task management system)
     ) -> Dict[str, Any]:
         """Synchronize task information with the warehouse.
 

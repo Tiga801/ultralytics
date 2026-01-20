@@ -1,63 +1,4 @@
 {
-<<<<<<< HEAD
-    "analyseConditions": [
-        {   
-            "standName": "stand_001",
-            "taskID": "face_detection_001",
-			"taskName": "Face Detection",
-			"deviceInfo": {
-				"deviceName": "Camera1",
-				"deviceCode": "camera_00000001",
-				"sourceRTSP": "rtsp://192.168.2.71:8554/mystream3",
-				"resloution": "120x80"
-			},
-            "configParam": {
-                "task": "face_detection",
-                "model": "yolo11m-pose.pt",
-                "kpt_score": 0.65,
-                "face_score": 0.65,
-                "frame_skip": 3
-            }
-        },
-        {   
-            "standName": "stand_001",
-            "taskID": "face_detection_002",
-			"taskName": "Face Detection",
-			"deviceInfo": {
-				"deviceName": "Camera1",
-				"deviceCode": "camera_00000001",
-				"sourceRTSP": "rtsp://192.168.2.71:8554/mystream3",
-				"resloution": "120x80"
-			},
-            "configParam": {
-                "task": "face_detection",
-                "model": "yolo11m-pose.pt",
-                "kpt_score": 0.65,
-                "face_score": 0.65,
-                "frame_skip": 3
-            }
-        },
-        {   
-            "standName": "stand_002",
-            "taskID": "face_detection_003",
-			"taskName": "Face Detection",
-			"deviceInfo": {
-				"deviceName": "Camera2",
-				"deviceCode": "camera_00000002",
-				"sourceRTSP": "rtsp://192.168.2.71:8554/mystream4",
-				"resloution": "120x80"
-			},
-            "configParam": {
-                "task": "face_detection",
-                "model": "yolo11m-pose.pt",
-                "kpt_score": 0.65,
-                "face_score": 0.65,
-                "frame_skip": 3
-            }
-        }
-    ]                                                                                                                                                                                        
-}
-=======
   "analyseConditions": [
     
     {
@@ -170,4 +111,3 @@
     }
   ]
 }
->>>>>>> 07331326 (feat: build video analytics task management system)

@@ -5,23 +5,16 @@ server startup utilities.
 """
 
 import os
-<<<<<<< HEAD
-from typing import Optional
-=======
 from typing import Optional, TYPE_CHECKING
->>>>>>> 07331326 (feat: build video analytics task management system)
 
 from flask import Flask
 
 from utils import Logger
 from engine import MainEngine, init_engine_config
 
-<<<<<<< HEAD
-=======
 if TYPE_CHECKING:
     from .warehouse import WarehouseService
 
->>>>>>> 07331326 (feat: build video analytics task management system)
 
 def create_app(config: Optional[dict] = None) -> Flask:
     """Create and configure Flask application.
@@ -80,11 +73,6 @@ def init_engine() -> MainEngine:
     return engine
 
 
-<<<<<<< HEAD
-def run_server(
-    host: str = "0.0.0.0",
-    port: int = 8666,
-=======
 def init_warehouse(engine_port: int = 8555) -> Optional["WarehouseService"]:
     """Initialize the warehouse service.
 
@@ -137,7 +125,6 @@ def init_warehouse(engine_port: int = 8555) -> Optional["WarehouseService"]:
 def run_server(
     host: str = "0.0.0.0",
     port: int = 8555,
->>>>>>> 07331326 (feat: build video analytics task management system)
     debug: bool = False,
     threaded: bool = True,
 ) -> None:
@@ -156,14 +143,11 @@ def run_server(
     engine = init_engine()
     engine.start()
 
-<<<<<<< HEAD
-=======
     # Initialize and start warehouse service
     warehouse = init_warehouse(engine_port=port)
     if warehouse:
         warehouse.start()
 
->>>>>>> 07331326 (feat: build video analytics task management system)
     # Create and run app
     app = create_app({"DEBUG": debug})
 
@@ -178,22 +162,15 @@ def run_server(
     except KeyboardInterrupt:
         log("Shutting down...")
     finally:
-<<<<<<< HEAD
-=======
         if warehouse:
             warehouse.stop()
->>>>>>> 07331326 (feat: build video analytics task management system)
         engine.stop()
         log("Server stopped")
 
 
 def run_gunicorn(
     host: str = "0.0.0.0",
-<<<<<<< HEAD
-    port: int = 8666,
-=======
     port: int = 8555,
->>>>>>> 07331326 (feat: build video analytics task management system)
     workers: int = 1,
 ) -> None:
     """Run with Gunicorn WSGI server.
@@ -224,14 +201,11 @@ def run_gunicorn(
         engine = init_engine()
         engine.start()
 
-<<<<<<< HEAD
-=======
         # Initialize and start warehouse service
         warehouse = init_warehouse(engine_port=port)
         if warehouse:
             warehouse.start()
 
->>>>>>> 07331326 (feat: build video analytics task management system)
         options = {
             "bind": f"{host}:{port}",
             "workers": workers,
@@ -240,16 +214,12 @@ def run_gunicorn(
         }
 
         app = create_app()
-<<<<<<< HEAD
-        GunicornApp(app, options).run()
-=======
         try:
             GunicornApp(app, options).run()
         finally:
             if warehouse:
                 warehouse.stop()
             engine.stop()
->>>>>>> 07331326 (feat: build video analytics task management system)
 
     except ImportError:
         print("Gunicorn not installed. Install with: pip install gunicorn")
@@ -259,10 +229,7 @@ def run_gunicorn(
 
 # Application instance for WSGI servers
 application = None
-<<<<<<< HEAD
-=======
 _warehouse_service: Optional["WarehouseService"] = None
->>>>>>> 07331326 (feat: build video analytics task management system)
 
 
 def get_wsgi_app() -> Flask:
@@ -273,24 +240,17 @@ def get_wsgi_app() -> Flask:
     Returns:
         Flask application.
     """
-<<<<<<< HEAD
-    global application
-=======
     global application, _warehouse_service
->>>>>>> 07331326 (feat: build video analytics task management system)
 
     if application is None:
         # Initialize engine
         init_engine().start()
-<<<<<<< HEAD
-=======
 
         # Initialize and start warehouse service
         _warehouse_service = init_warehouse()
         if _warehouse_service:
             _warehouse_service.start()
 
->>>>>>> 07331326 (feat: build video analytics task management system)
         application = create_app()
 
     return application

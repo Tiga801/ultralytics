@@ -7,11 +7,7 @@ task configurations throughout the system.
 import json
 import threading
 from dataclasses import dataclass, field
-<<<<<<< HEAD
-from typing import Any, Callable, Dict, List, Optional, Tuple
-=======
 from typing import Any, Callable, Dict, List, Optional
->>>>>>> 07331326 (feat: build video analytics task management system)
 
 from utils import SingletonMeta
 
@@ -241,8 +237,6 @@ class TaskConfig:
         """Get areas/regions configuration for the task."""
         return self.config_params.get("areasInfo", [])
 
-<<<<<<< HEAD
-=======
     def get_roi_areas_info(self, frame_width: int, frame_height: int) -> List[Dict[str, Any]]:
         """Get ROI regions converted to pixel coordinates.
 
@@ -286,7 +280,6 @@ class TaskConfig:
 
         return roi_areas
 
->>>>>>> 07331326 (feat: build video analytics task management system)
 
 class TaskConfigManager(metaclass=SingletonMeta):
     """Centralized task configuration storage (Singleton).

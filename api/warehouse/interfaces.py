@@ -16,11 +16,7 @@ Classes:
 """
 
 from abc import ABC, abstractmethod
-<<<<<<< HEAD
-from dataclasses import dataclass, field
-=======
 from dataclasses import dataclass
->>>>>>> 07331326 (feat: build video analytics task management system)
 from typing import Any, Callable, Dict, List, Optional
 
 from .config import EngineCapabilities

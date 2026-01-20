@@ -16,10 +16,7 @@ from tracks import BYTETracker, TrackerConfig
 from utils.mqtt import MQTTClient, MQTTConfig
 from utils.minio import MinIOClient, MinIOConfig
 from .utils.region import parse_detection_region
-<<<<<<< HEAD
-=======
 from .utils.roi import ROIFilter
->>>>>>> 07331326 (feat: build video analytics task management system)
 from .utils.message import setup_mqtt_logger
 from .utils.visual import face_detection_visualization
 from .face_detect import get_ori_face_bbox
@@ -100,13 +97,10 @@ class FaceDetectionTask(TaskBase):
         self._frame_skip = self.task_config.get_extra("frame_skip", 1)
         self._frame_count = 0
 
-<<<<<<< HEAD
-=======
         # ROI filter (lazy initialization - needs frame dimensions)
         self._roi_filter: Optional[ROIFilter] = None
         self._roi_filter_initialized = False
 
->>>>>>> 07331326 (feat: build video analytics task management system)
         self.log(f"FaceDetectionTask {self.task_id} initialized, recognition={self._enable_recognition}")
 
     def _cleanup_in_process(self) -> None:
@@ -115,10 +109,7 @@ class FaceDetectionTask(TaskBase):
         self.tracker = None
         self._face_analyzer = None
         self._track_states.clear()
-<<<<<<< HEAD
-=======
         self._roi_filter = None
->>>>>>> 07331326 (feat: build video analytics task management system)
 
         # Stop MQTT broker client
         if hasattr(self, '_mqtt_client') and self._mqtt_client:
@@ -166,8 +157,6 @@ class FaceDetectionTask(TaskBase):
         result = TaskResult(task_id=self.task_id)
         result.timestamp = timestamp
 
-<<<<<<< HEAD
-=======
         # Lazy initialization of ROI filter (needs frame dimensions)
         if not self._roi_filter_initialized:
             frame_height, frame_width = frame.shape[:2]
@@ -177,7 +166,6 @@ class FaceDetectionTask(TaskBase):
             if self._roi_filter.enabled:
                 self.log(f"ROI filter initialized with {self._roi_filter.region_count} region(s)")
 
->>>>>>> 07331326 (feat: build video analytics task management system)
         # Frame skip for performance
         self._frame_count += 1
         if self._frame_count % self._frame_skip != 0:
@@ -228,14 +216,11 @@ class FaceDetectionTask(TaskBase):
 
             current_track_ids.add(track_id)
 
-<<<<<<< HEAD
-=======
             # ========== ROI CHECK (FIRST - before detection logic) ==========
             # Skip targets whose center is outside all configured ROI regions
             if self._roi_filter and not self._roi_filter.is_target_in_roi(x1, y1, x2, y2):
                 continue
 
->>>>>>> 07331326 (feat: build video analytics task management system)
             # Get current keypoint sum (sum of first 5 keypoint confidences)
             current_kpt_sum = kpt_sums_per_det[det_idx] if 0 <= det_idx < len(kpt_sums_per_det) else 0.0
 
@@ -303,11 +288,8 @@ class FaceDetectionTask(TaskBase):
 
                                     # Get face bbox from InsightFace (in cropped body image coordinates)
                                     face_bbox = best_face.bbox.astype(int)
-<<<<<<< HEAD
-=======
                                     gender = getattr(best_face, 'gender', -1)
                                     age = getattr(best_face, 'age', -1)
->>>>>>> 07331326 (feat: build video analytics task management system)
 
                                     # Transform to frame coordinates using clamped crop offset
                                     # Note: Use clamped crop coordinates as offset since face_bbox is relative to cropped image
@@ -324,18 +306,11 @@ class FaceDetectionTask(TaskBase):
                                     visual_img = face_detection_visualization(frame)
                                     
                                     unique_id = uuid.uuid4().hex
-<<<<<<< HEAD
-                                    body_url = f"{minio_object_prefix}/{self.task_id}-body-{track_id}-{unique_id}.jpg"
-                                    face_url = f"{minio_object_prefix}/{self.task_id}-face-{track_id}-{unique_id}.jpg"
-                                    expanded_face_url = f"{minio_object_prefix}/{self.task_id}-expanded-{track_id}-{unique_id}.jpg"
-                                    visual_url = f"{minio_object_prefix}/{self.task_id}-visual-{track_id}-{unique_id}.jpg"
-=======
                                     img_filename = f"{self.task_id}-trackID{track_id}-score{int(current_face_score * 1000)}-{unique_id}.jpg"
                                     body_url = f"{minio_object_prefix}/body/{img_filename}"
                                     face_url = f"{minio_object_prefix}/face/{img_filename}"
                                     expanded_face_url = f"{minio_object_prefix}/expanded/{img_filename}"
                                     visual_url = f"{minio_object_prefix}/visual/{img_filename}"
->>>>>>> 07331326 (feat: build video analytics task management system)
                                     self._minio_client.upload_image(body_img, body_url)
                                     self._minio_client.upload_image(face_img, face_url)
                                     self._minio_client.upload_image(expanded_face_img, expanded_face_url)

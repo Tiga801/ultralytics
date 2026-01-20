@@ -32,11 +32,7 @@ class EngineCapabilities:
     task_total_num: int = 8
     total_capability: int = 1000
     cur_capability: int = 500
-<<<<<<< HEAD
-    resolution_cap: Tuple[int, int] = (300, 500)
-=======
     resolution_cap: Tuple[int, int] = (300, 5000)
->>>>>>> 07331326 (feat: build video analytics task management system)
 
     def to_api_dict(self) -> Dict[str, Any]:
         """Convert to camelCase format for API requests.
@@ -64,11 +60,7 @@ class EngineCapabilities:
         Returns:
             New EngineCapabilities instance.
         """
-<<<<<<< HEAD
-        resolution = data.get("resolutionCap", data.get("resolution_cap", [300, 500]))
-=======
         resolution = data.get("resolutionCap", data.get("resolution_cap", [300, 5000]))
->>>>>>> 07331326 (feat: build video analytics task management system)
         if isinstance(resolution, list):
             resolution = tuple(resolution)
 
@@ -123,21 +115,12 @@ class WarehouseConfig:
     retry_max_delay: float = 30.0
 
     # Engine identification
-<<<<<<< HEAD
-    engine_name: str = "easyair-mta"
-    engine_version: str = "1.0.0"
-    engine_port: int = 8555
-
-    # Algorithm classification
-    algo_category: str = "behavior"
-=======
     engine_name: str = "easyair-terminal"
     engine_version: str = "2.0.0.0"
     engine_port: int = 8555
 
     # Algorithm classification
     algo_category: str = "other"
->>>>>>> 07331326 (feat: build video analytics task management system)
 
     @property
     def base_url(self) -> str:
@@ -208,17 +191,10 @@ class WarehouseConfig:
             max_retries=int(data.get("max_retries", data.get("maxRetries", 3))),
             retry_base_delay=float(data.get("retry_base_delay", data.get("retryBaseDelay", 1.0))),
             retry_max_delay=float(data.get("retry_max_delay", data.get("retryMaxDelay", 30.0))),
-<<<<<<< HEAD
-            engine_name=data.get("engine_name", data.get("engineName", "easyair-mta")),
-            engine_version=data.get("engine_version", data.get("engineVersion", "1.0.0")),
-            engine_port=int(data.get("engine_port", data.get("enginePort", 8555))),
-            algo_category=data.get("algo_category", data.get("algoCategory", "behavior")),
-=======
             engine_name=data.get("engine_name", data.get("engineName", "easyair-terminal")),
             engine_version=data.get("engine_version", data.get("engineVersion", "2.0.0.0")),
             engine_port=int(data.get("engine_port", data.get("enginePort", 8555))),
             algo_category=data.get("algo_category", data.get("algoCategory", "other")),
->>>>>>> 07331326 (feat: build video analytics task management system)
         )
 
     def to_dict(self) -> Dict[str, Any]:

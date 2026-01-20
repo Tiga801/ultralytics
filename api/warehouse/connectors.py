@@ -86,13 +86,8 @@ class DefaultEngineInfoProvider(EngineInfoProviderInterface):
         engine_id: Optional[str] = None,
         engine_addr: Optional[str] = None,
         engine_port: int = 8555,
-<<<<<<< HEAD
-        engine_name: str = "easyair-mta",
-        engine_version: str = "1.0.0",
-=======
         engine_name: str = "easyair-terminal",
         engine_version: str = "2.0.0.0",
->>>>>>> 07331326 (feat: build video analytics task management system)
     ):
         """Initialize the engine info provider.
 
@@ -266,11 +261,7 @@ class MainEngineConnector(TaskConnectorInterface, EngineInfoProviderInterface):
 
         try:
             caps = engine.get_capabilities()
-<<<<<<< HEAD
-            resolution = caps.get("resolutionCap", [300, 500])
-=======
             resolution = caps.get("resolutionCap", [300, 5000])
->>>>>>> 07331326 (feat: build video analytics task management system)
             if isinstance(resolution, list):
                 resolution = tuple(resolution)
 

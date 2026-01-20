@@ -17,13 +17,8 @@ class EngineConfig:
     """
 
     # Service settings
-<<<<<<< HEAD
-    service_name: str = "easyair-common"
-    service_port: int = 8666
-=======
     service_name: str = "easyair-terminal"
     service_port: int = 8555
->>>>>>> 07331326 (feat: build video analytics task management system)
     debug: bool = False
 
     # Directory settings

@@ -63,9 +63,6 @@ def apply_region_mask(frame: np.ndarray, region) -> np.ndarray:
         cv2.fillPoly(mask, [points], 255)
 
         masked = cv2.bitwise_and(frame, frame, mask=mask)
-<<<<<<< HEAD
-        return masked
-=======
         return masked
 
 
@@ -104,4 +101,3 @@ def parse_roi_regions(areas_info: List[Dict[str, Any]]) -> List[List[Tuple[int, 
             polygon = [(p["x"], p["y"]) for p in points]
             regions.append(polygon)
     return regions
->>>>>>> 07331326 (feat: build video analytics task management system)

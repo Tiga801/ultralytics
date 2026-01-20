@@ -455,11 +455,7 @@ class MainEngine(metaclass=SingletonMeta):
             "taskTotalNum": MAX_TASK_CAPACITY,
             "totalCapability": TOTAL_CAPABILITY,
             "curCapability": max(0, TOTAL_CAPABILITY - task_count * CAPABILITY_PER_TASK),
-<<<<<<< HEAD
-            "resolutionCap": [300, 500]
-=======
             "resolutionCap": [300, 5000]
->>>>>>> 07331326 (feat: build video analytics task management system)
         }
 
     def __repr__(self) -> str:

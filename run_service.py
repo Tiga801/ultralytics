@@ -9,11 +9,7 @@ Usage:
     python run_service.py
 
     # Run with custom host and port
-<<<<<<< HEAD
-    python run_service.py --host 0.0.0.0 --port 8666
-=======
     python run_service.py --host 0.0.0.0 --port 8555
->>>>>>> 07331326 (feat: build video analytics task management system)
 
     # Run in debug mode
     python run_service.py --debug
@@ -46,13 +42,8 @@ def parse_args():
     parser.add_argument(
         "--port",
         type=int,
-<<<<<<< HEAD
-        default=8666,
-        help="Port number (default: 8666)"
-=======
         default=8555,
         help="Port number (default: 8555)"
->>>>>>> 07331326 (feat: build video analytics task management system)
     )
     parser.add_argument(
         "--debug",

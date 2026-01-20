@@ -12,11 +12,7 @@ Components:
 Usage:
     >>> from api import create_app, run_server
     >>> app = create_app()
-<<<<<<< HEAD
-    >>> run_server(host="0.0.0.0", port=8666)
-=======
     >>> run_server(host="0.0.0.0", port=8555)
->>>>>>> 07331326 (feat: build video analytics task management system)
 
 Or use the WSGI application:
     >>> from api import get_wsgi_app
@@ -37,10 +33,7 @@ API Endpoints:
 from .app import (
     create_app,
     init_engine,
-<<<<<<< HEAD
-=======
     init_warehouse,
->>>>>>> 07331326 (feat: build video analytics task management system)
     run_server,
     run_gunicorn,
     get_wsgi_app,
@@ -62,10 +55,7 @@ __all__ = [
     # Application
     "create_app",
     "init_engine",
-<<<<<<< HEAD
-=======
     "init_warehouse",
->>>>>>> 07331326 (feat: build video analytics task management system)
     "run_server",
     "run_gunicorn",
     "get_wsgi_app",

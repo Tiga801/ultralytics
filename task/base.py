@@ -1,19 +1,11 @@
 """Task base class.
 
 This module provides the TaskBase abstract class that all CV tasks must extend.
-<<<<<<< HEAD
-Each task runs as a separate thread for development and debugging convenience.
-"""
-
-import queue
-import threading
-=======
 Each task runs as a separate OS process for resource isolation.
 """
 
 import multiprocessing as mp
 import queue
->>>>>>> 07331326 (feat: build video analytics task management system)
 import traceback
 from abc import ABC, abstractmethod
 from typing import Any, Dict, Optional
@@ -29,14 +21,9 @@ from .state import TaskState, TaskStateMachine
 class TaskBase(ABC):
     """Abstract base class for all CV tasks.
 
-<<<<<<< HEAD
-    Each task runs as a SEPARATE THREAD for development and debugging convenience.
-    Note: This uses threading instead of multiprocessing for easier debugging.
-=======
     Each task runs as a SEPARATE OS PROCESS for resource isolation.
     This ensures independent memory space, GPU resource isolation,
     and easy cleanup when tasks are stopped.
->>>>>>> 07331326 (feat: build video analytics task management system)
 
     Subclasses must implement:
         - on_process(frame, timestamp) -> TaskResult
@@ -73,15 +60,6 @@ class TaskBase(ABC):
         # State management
         self._state_machine = TaskStateMachine()
 
-<<<<<<< HEAD
-        # Thread communication queues
-        self._input_queue: Optional[queue.Queue] = None   # Frames from CameraEngine
-        self._output_queue: Optional[queue.Queue] = None  # Results back to manager
-        self._control_queue: Optional[queue.Queue] = None # Control commands
-
-        # Thread handle
-        self._thread: Optional[threading.Thread] = None
-=======
         # Process communication queues
         self._input_queue: Optional[mp.Queue] = None   # Frames from CameraEngine
         self._output_queue: Optional[mp.Queue] = None  # Results back to manager
@@ -89,7 +67,6 @@ class TaskBase(ABC):
 
         # Process handle
         self._process: Optional[mp.Process] = None
->>>>>>> 07331326 (feat: build video analytics task management system)
 
         # Logger
         self.log = Logger.get_logging_method(f"TASK-{task_id[:18]}")
@@ -124,11 +101,7 @@ class TaskBase(ABC):
     # ==================== Lifecycle Methods ====================
 
     def start(self) -> bool:
-<<<<<<< HEAD
-        """Start the task thread.
-=======
         """Start the task process.
->>>>>>> 07331326 (feat: build video analytics task management system)
 
         Returns:
             True if started successfully.
@@ -139,15 +112,6 @@ class TaskBase(ABC):
 
         try:
             # Create communication queues
-<<<<<<< HEAD
-            self._input_queue = queue.Queue(maxsize=50)
-            self._output_queue = queue.Queue(maxsize=100)
-            self._control_queue = queue.Queue(maxsize=10)
-
-            # Create and start thread
-            self._thread = threading.Thread(
-                target=self._thread_main,
-=======
             self._input_queue = mp.Queue(maxsize=50)
             self._output_queue = mp.Queue(maxsize=100)
             self._control_queue = mp.Queue(maxsize=10)
@@ -155,7 +119,6 @@ class TaskBase(ABC):
             # Create and start process
             self._process = mp.Process(
                 target=self._process_main,
->>>>>>> 07331326 (feat: build video analytics task management system)
                 args=(
                     self.task_id,
                     self.task_config.to_dict(),
@@ -166,19 +129,11 @@ class TaskBase(ABC):
                 daemon=True,
                 name=f"Task-{self.task_id[:18]}"
             )
-<<<<<<< HEAD
-            self._thread.start()
-
-            # Transition state
-            self._state_machine.transition(TaskState.RUNNING)
-            self.log(f"Task started (Thread ID: {self._thread.ident})")
-=======
             self._process.start()
 
             # Transition state
             self._state_machine.transition(TaskState.RUNNING)
             self.log(f"Task started (PID: {self._process.pid})")
->>>>>>> 07331326 (feat: build video analytics task management system)
 
             # Call hook
             self.on_start()
@@ -190,11 +145,7 @@ class TaskBase(ABC):
             return False
 
     def stop(self) -> bool:
-<<<<<<< HEAD
-        """Stop the task thread.
-=======
         """Stop the task process.
->>>>>>> 07331326 (feat: build video analytics task management system)
 
         Returns:
             True if stopped successfully.
@@ -210,15 +161,6 @@ class TaskBase(ABC):
                 except queue.Full:
                     pass
 
-<<<<<<< HEAD
-            # Wait for thread to terminate
-            # Note: Threads cannot be forcefully terminated like processes,
-            # but daemon=True ensures cleanup when main process exits
-            if self._thread and self._thread.is_alive():
-                self._thread.join(timeout=5)
-                if self._thread.is_alive():
-                    self.log("Thread still alive after timeout (daemon thread will be cleaned up on exit)")
-=======
             # Wait for process to terminate
             if self._process and self._process.is_alive():
                 self._process.join(timeout=5)
@@ -226,7 +168,6 @@ class TaskBase(ABC):
                     self.log("Force terminating task process")
                     self._process.terminate()
                     self._process.join(timeout=2)
->>>>>>> 07331326 (feat: build video analytics task management system)
 
             # Cleanup queues
             self._cleanup_queues()
@@ -289,21 +230,14 @@ class TaskBase(ABC):
             return False
 
     def _cleanup_queues(self) -> None:
-<<<<<<< HEAD
-        """Clean up thread queues."""
-=======
         """Clean up multiprocessing queues."""
->>>>>>> 07331326 (feat: build video analytics task management system)
         for q in [self._input_queue, self._output_queue, self._control_queue]:
             if q:
                 try:
                     while not q.empty():
                         q.get_nowait()
-<<<<<<< HEAD
-=======
                     q.close()
                     q.join_thread()
->>>>>>> 07331326 (feat: build video analytics task management system)
                 except Exception:
                     pass
 
@@ -311,22 +245,6 @@ class TaskBase(ABC):
         self._output_queue = None
         self._control_queue = None
 
-<<<<<<< HEAD
-    # ==================== Thread Entry Point ====================
-
-    @classmethod
-    def _thread_main(
-        cls,
-        task_id: str,
-        config_dict: Dict[str, Any],
-        input_queue: queue.Queue,
-        output_queue: queue.Queue,
-        control_queue: queue.Queue,
-    ) -> None:
-        """Main entry point for the task thread.
-
-        This runs in a separate thread and handles the main processing loop.
-=======
     # ==================== Process Entry Point ====================
 
     @classmethod
@@ -341,7 +259,6 @@ class TaskBase(ABC):
         """Main entry point for the task process.
 
         This runs in a separate process and handles the main processing loop.
->>>>>>> 07331326 (feat: build video analytics task management system)
 
         Args:
             task_id: Task identifier.
@@ -350,19 +267,6 @@ class TaskBase(ABC):
             output_queue: Queue for sending results.
             control_queue: Queue for control commands.
         """
-<<<<<<< HEAD
-        from task.registry import TaskRegistry
-
-        # Initialize logger in thread
-        Logger.init()
-        log = Logger.get_logging_method(f"THRD-{task_id[:18]}")
-        log("Task thread started")
-
-        # Reconstruct config
-        config = TaskConfig(**{k: v for k, v in config_dict.items()
-                              if k in TaskConfig.__dataclass_fields__})
-
-=======
         # Import here to avoid issues with multiprocessing
         from task.registry import TaskRegistry
 
@@ -379,7 +283,6 @@ class TaskBase(ABC):
         )
         log("Task process started")
 
->>>>>>> 07331326 (feat: build video analytics task management system)
         # Create task instance using registry
         try:
             task_cls = TaskRegistry.get_class(config.task_type)
@@ -466,15 +369,6 @@ class TaskBase(ABC):
         except Exception as e:
             log(f"Error in cleanup: {e}")
 
-<<<<<<< HEAD
-        log("Task thread exiting")
-
-    def _init_in_process(self) -> None:
-        """Initialize resources in the thread.
-
-        Override this method to load models and allocate GPU resources.
-        This is called once when the thread starts.
-=======
         log("Task process exiting")
 
     def _init_in_process(self) -> None:
@@ -482,22 +376,14 @@ class TaskBase(ABC):
 
         Override this method to load models and allocate GPU resources.
         This is called once when the process starts.
->>>>>>> 07331326 (feat: build video analytics task management system)
         """
         pass
 
     def _cleanup_in_process(self) -> None:
-<<<<<<< HEAD
-        """Cleanup resources in the thread.
-
-        Override this method to release models and GPU resources.
-        This is called once when the thread exits.
-=======
         """Cleanup resources in the subprocess.
 
         Override this method to release models and GPU resources.
         This is called once when the process exits.
->>>>>>> 07331326 (feat: build video analytics task management system)
         """
         pass
 
@@ -525,11 +411,7 @@ class TaskBase(ABC):
     def on_process(self, frame: np.ndarray, timestamp: float) -> TaskResult:
         """Process a single frame.
 
-<<<<<<< HEAD
-        This method is called for each frame in the thread.
-=======
         This method is called for each frame in the subprocess.
->>>>>>> 07331326 (feat: build video analytics task management system)
         Implement task-specific processing logic here.
 
         Args:
@@ -606,13 +488,8 @@ class TaskBase(ABC):
             "state": str(self.state),
             "isRunning": self.is_running(),
             "isPaused": self.is_paused(),
-<<<<<<< HEAD
-            "threadAlive": self._thread.is_alive() if self._thread else False,
-            "threadId": self._thread.ident if self._thread else None,
-=======
             "processAlive": self._process.is_alive() if self._process else False,
             "pid": self._process.pid if self._process else None,
->>>>>>> 07331326 (feat: build video analytics task management system)
         }
 
     def get_task_status_for_algo_warehouse(self) -> int:

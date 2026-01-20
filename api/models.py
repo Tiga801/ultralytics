@@ -188,11 +188,7 @@ class CapabilityResponse:
     task_total_num: int = 10
     total_capability: int = 100
     cur_capability: int = 100
-<<<<<<< HEAD
-    resolution_cap: List[int] = field(default_factory=lambda: [300, 500])
-=======
     resolution_cap: List[int] = field(default_factory=lambda: [300, 5000])
->>>>>>> 07331326 (feat: build video analytics task management system)
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for Algorithm Warehouse format."""
